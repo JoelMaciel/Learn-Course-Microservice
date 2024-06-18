@@ -1,0 +1,69 @@
+package com.joel.learn.course.domain.services.impl;
+
+import com.joel.learn.course.domain.dtos.CourseDTO;
+import com.joel.learn.course.domain.dtos.CourseRequestDTO;
+import com.joel.learn.course.domain.excptions.CourseNotFoundException;
+import com.joel.learn.course.domain.models.Course;
+import com.joel.learn.course.domain.repositories.CourseRepository;
+import com.joel.learn.course.domain.services.CourseService;
+import com.joel.learn.course.domain.services.converter.CourseConverter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
+
+@Log4j2
+@RequiredArgsConstructor
+@Service
+public class CourseServiceImpl implements CourseService {
+
+    private final CourseRepository courseRepository;
+    private final CourseConverter courseConverter;
+
+    @Override
+    public Page<CourseDTO> findAll(Pageable pageable) {
+        Page<Course> courses = courseRepository.findAll(pageable);
+        return courseConverter.toPageDTO(courses);
+    }
+
+    @Override
+    public CourseDTO findById(UUID courseId) {
+        Course course = optionalCourse(courseId);
+        return courseConverter.toDTO(course);
+    }
+
+    @Transactional
+    @Override
+    public CourseDTO update(UUID courseId, CourseRequestDTO courseRequestDTO) {
+        Course course = optionalCourse(courseId);
+        Course courseUpdated = courseConverter.toUpdatedEntity(course, courseRequestDTO);
+        return courseConverter.toDTO(courseRepository.save(courseUpdated));
+    }
+
+    @Transactional
+    @Override
+    public CourseDTO save(CourseRequestDTO courseRequestDTO) {
+        Course course = courseConverter.toEntity(courseRequestDTO);
+
+        log.info("Saving course from CourseId : {}", course.getCourseId());
+        return courseConverter.toDTO(courseRepository.save(course));
+    }
+
+    @Transactional
+    @Override
+    public void delete(UUID courseId) {
+        optionalCourse(courseId);
+        courseRepository.deleteById(courseId);
+        log.info("CourseId deleted: {}", courseId);
+    }
+
+    @Override
+    public Course optionalCourse(UUID courseId) {
+        return courseRepository.findById(courseId)
+                .orElseThrow(() -> new CourseNotFoundException(courseId));
+    }
+}

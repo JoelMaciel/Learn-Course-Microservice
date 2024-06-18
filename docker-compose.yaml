@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+   postgres_course:
+    image: postgres
+    container_name: postgres-course
+    environment:
+      POSTGRES_DB: course
+      POSTGRES_USER: joel
+      POSTGRES_PASSWORD: docker
+    ports:
+      - "5434:5432"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:

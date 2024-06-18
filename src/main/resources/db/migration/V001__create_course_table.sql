@@ -1,0 +1,7 @@
+CREATE TABLE COURSE (
+    course_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    title VARCHAR(50) NOT NULL UNIQUE,
+    subtitle VARCHAR(100) NOT NULL,
+    price NUMERIC(10,2) NOT NULL ,
+    creation_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
