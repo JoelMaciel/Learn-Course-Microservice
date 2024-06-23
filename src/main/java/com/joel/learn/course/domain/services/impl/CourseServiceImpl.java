@@ -1,11 +1,14 @@
 package com.joel.learn.course.domain.services.impl;
 
+import com.joel.learn.course.api.publishers.PurchaseCommandPublisher;
 import com.joel.learn.course.domain.dtos.CourseDTO;
 import com.joel.learn.course.domain.dtos.CourseRequestDTO;
+import com.joel.learn.course.domain.dtos.PurchaseEventDTO;
 import com.joel.learn.course.domain.excptions.CourseNotFoundException;
 import com.joel.learn.course.domain.models.Course;
 import com.joel.learn.course.domain.repositories.CourseRepository;
 import com.joel.learn.course.domain.services.CourseService;
+import com.joel.learn.course.domain.services.UserService;
 import com.joel.learn.course.domain.services.converter.CourseConverter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,6 +26,8 @@ public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
     private final CourseConverter courseConverter;
+    private final PurchaseCommandPublisher purchaseCommandPublisher;
+    private final UserService userService;
 
     @Override
     public Page<CourseDTO> findAll(Pageable pageable) {
@@ -51,6 +56,16 @@ public class CourseServiceImpl implements CourseService {
 
         log.info("Saving course from CourseId : {}", course.getCourseId());
         return courseConverter.toDTO(courseRepository.save(course));
+    }
+
+    @Override
+    public void purchaseEvent(PurchaseEventDTO purchaseEventDTO) {
+        userService.optionalUser(purchaseEventDTO.getUserId());
+
+        Course course = optionalCourse(purchaseEventDTO.getCourseId());
+        purchaseEventDTO.setTitle(course.getTitle());
+
+        purchaseCommandPublisher.publishPurchaseEvent(purchaseEventDTO);
     }
 
     @Transactional

@@ -36,9 +36,12 @@ learn:
   broker:
     exchange:
       userEventExchange: userevent
+      purchaseCommandExchange: learn.purchaseCommand
     queue:
       userEventQueue:
         name: learn.userevent.ms.course
+    key:
+      purchaseCommandKey: ms.purchase
 
 logging:
   level:
