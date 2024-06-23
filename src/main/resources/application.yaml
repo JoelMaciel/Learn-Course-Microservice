@@ -20,6 +20,11 @@ spring:
   flyway:
     locations: classpath:db/migration, classpath:db/testdb
     baselineOnMigrate: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 learn:
   serviceRegistry:
@@ -28,6 +33,15 @@ learn:
   auth:
     jwtSecret: ${JWT_SECRET}
     jwtExpirationMs: 14400000
+  broker:
+    exchange:
+      userEventExchange: userevent
+      purchaseCommandExchange: learn.purchaseCommand
+    queue:
+      userEventQueue:
+        name: learn.userevent.ms.course
+    key:
+      purchaseCommandKey: ms.purchase
 
 logging:
   level:

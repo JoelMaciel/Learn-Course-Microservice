@@ -2,6 +2,7 @@ package com.joel.learn.course.domain.services;
 
 import com.joel.learn.course.domain.dtos.CourseDTO;
 import com.joel.learn.course.domain.dtos.CourseRequestDTO;
+import com.joel.learn.course.domain.dtos.PurchaseEventDTO;
 import com.joel.learn.course.domain.models.Course;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,4 +22,6 @@ public interface CourseService {
     CourseDTO findById(UUID courseId);
 
     CourseDTO update(UUID courseId, CourseRequestDTO courseRequestDTO);
+
+    void purchaseEvent(PurchaseEventDTO purchaseEventDTO);
 }

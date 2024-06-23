@@ -2,6 +2,7 @@ package com.joel.learn.course.api.controllers;
 
 import com.joel.learn.course.domain.dtos.CourseDTO;
 import com.joel.learn.course.domain.dtos.CourseRequestDTO;
+import com.joel.learn.course.domain.dtos.PurchaseEventDTO;
 import com.joel.learn.course.domain.services.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +22,7 @@ import java.util.UUID;
 @RequestMapping("/api/courses")
 public class CourseController {
 
+    public static final String SUCCESSFULLY = "Purchase Completed Successfully";
     private final CourseService courseService;
 
     @PreAuthorize("hasAnyRole('STUDENT')")
@@ -47,6 +50,14 @@ public class CourseController {
     @ResponseStatus(HttpStatus.CREATED)
     public CourseDTO save(@RequestBody @Valid CourseRequestDTO courseRequestDTO) {
         return courseService.save(courseRequestDTO);
+    }
+
+    @PreAuthorize("hasAnyRole('STUDENT')")
+    @PostMapping("/purchases")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Object> savePurchaseEvent(@RequestBody @Valid PurchaseEventDTO purchaseEventDTO) {
+        courseService.purchaseEvent(purchaseEventDTO);
+        return ResponseEntity.ok().body(SUCCESSFULLY);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
