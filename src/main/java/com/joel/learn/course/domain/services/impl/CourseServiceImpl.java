@@ -25,7 +25,7 @@ import java.util.UUID;
 @Service
 public class CourseServiceImpl implements CourseService {
 
-    public static final String THERE_IS_ALREADY_A_BOOK_WITH_THIS_TITLE = "Book cannot be saved because there is already a book with that title";
+    public static final String THERE_IS_ALREADY_A_COURSE_WITH_THIS_TITLE = "Course cannot be saved because there is already a course with that title";
     private final CourseRepository courseRepository;
     private final CourseConverter courseConverter;
     private final PurchaseCommandPublisher purchaseCommandPublisher;
@@ -87,7 +87,7 @@ public class CourseServiceImpl implements CourseService {
 
     private void validateTitle(CourseRequestDTO courseRequestDTO) {
         if (courseRepository.existsByTitle(courseRequestDTO.getTitle())) {
-            throw new TitleAlreadyExistsException(THERE_IS_ALREADY_A_BOOK_WITH_THIS_TITLE);
+            throw new TitleAlreadyExistsException(THERE_IS_ALREADY_A_COURSE_WITH_THIS_TITLE);
         }
     }
 }

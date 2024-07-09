@@ -6,7 +6,7 @@ import com.joel.learn.course.domain.models.Course;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Component
 public class CourseConverter {
@@ -30,7 +30,7 @@ public class CourseConverter {
                 .title(courseRequestDTO.getTitle())
                 .subtitle(courseRequestDTO.getSubtitle())
                 .price(courseRequestDTO.getPrice())
-                .creationDate(LocalDateTime.now())
+                .creationDate(OffsetDateTime.now())
                 .build();
     }
 

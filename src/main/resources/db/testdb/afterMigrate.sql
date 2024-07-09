@@ -13,3 +13,12 @@ VALUES (
     '2024-07-01 10:30:00'
 );
 
+INSERT INTO USERS (user_id, email, cpf, user_type, full_name)
+VALUES (
+    'e53b4d24-6b49-4b7e-9f0b-69f77d4d64b8',
+    'admin@example.com',
+    '008.655.700-94',
+    'ADMIN',
+    'Maciel Viana Admin'
+);
+
