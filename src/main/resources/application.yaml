@@ -8,8 +8,8 @@ spring:
     name: learn-course-service
   datasource:
     url: jdbc:postgresql://localhost:5434/course
-    username: joel
-    password: docker
+    username: viana
+    password: docker123
   jpa:
     properties:
       hibernate:
@@ -28,10 +28,10 @@ spring:
 
 learn:
   serviceRegistry:
-    username: ${NAME}
-    password: ${PASSWORD}
+    username: serviceresgistry
+    password: learn123sr
   auth:
-    jwtSecret: ${JWT_SECRET}
+    jwtSecret: 7Xt4tQbTnqmE?xDY4j3DphnMPHScU2EoBi9zarOtRTE9DPNJAdGz7X-ge/uZjZtiMcVKf4gyhd34QVBhjnxO0v9/KD7=2LnGNaqQI!5LgCfXz5Q-n1OD7b=96J5960mr
     jwtExpirationMs: 14400000
   broker:
     exchange:
@@ -53,6 +53,6 @@ logging:
 eureka:
   client:
     serviceUrl:
-      defaultZone: 'http://${learn.serviceRegistry.username}:${learn.serviceRegistry.password}@localhost:8761/eureka'
+      defaultZone: 'http://serviceregistry:learn123sr@localhost:8761/eureka'
   instance:
     hostname: localhost
