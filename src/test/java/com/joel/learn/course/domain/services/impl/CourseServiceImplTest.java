@@ -10,7 +10,7 @@ import com.joel.learn.course.domain.models.Course;
 import com.joel.learn.course.domain.repositories.CourseRepository;
 import com.joel.learn.course.domain.services.UserService;
 import com.joel.learn.course.domain.services.converter.CourseConverter;
-import com.joel.learn.course.domain.services.impl.utils.TestUtils;
+import com.joel.learn.course.utils.TestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -62,7 +62,7 @@ class CourseServiceImplTest {
         course = TestUtils.getMockCourseModel();
         courseDTO = TestUtils.getMockCourseDTO();
         courseRequestDTO = TestUtils.getMockCourseRequestDTO();
-        courseId = UUID.fromString("081caae9-358d-4ded-9a37-e2a66573549a");
+        courseId = UUID.fromString("0a657c35-e0ed-44e0-b25c-3afbeadd643e");
         invalidCourseId = UUID.fromString("e53b4d24-6b49-4b7e-9f0b-69f77d4d64b8");
 
         when(courseRepository.findById(courseId)).thenReturn(Optional.of(course));

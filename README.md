@@ -33,6 +33,12 @@
 #### Unit Tests
 ![Captura de tela de 2024-07-09 20-42-45](https://github.com/JoelMaciel/Learn-Course-Microservice/assets/77079093/3d17f994-7a3b-414a-8b50-9c1bd40ff4e5)
 
+#### E2R Tests
+![Captura de tela de 2024-07-11 09-44-36](https://github.com/JoelMaciel/Learn-Course-Microservice/assets/77079093/06280f62-2c5c-4c27-952c-09953d227ae3)
+
+![Captura de tela de 2024-07-11 09-43-17](https://github.com/JoelMaciel/Learn-Course-Microservice/assets/77079093/2726d834-9787-4286-bc30-52bd881355c6)
+
+
 #### Jacoco
 ![Captura de tela de 2024-07-09 20-32-02](https://github.com/JoelMaciel/Learn-Course-Microservice/assets/77079093/fb346572-1cb8-4092-8ddd-ba65ffe032b3)
 
