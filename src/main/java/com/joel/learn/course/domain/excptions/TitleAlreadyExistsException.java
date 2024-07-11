@@ -1,6 +1,8 @@
 package com.joel.learn.course.domain.excptions;
 
-public class TitleAlreadyExistsException extends BusinessException{
+import org.springframework.dao.DataIntegrityViolationException;
+
+public class TitleAlreadyExistsException extends DataIntegrityViolationException {
 
     public TitleAlreadyExistsException(String message) {
         super(message);
