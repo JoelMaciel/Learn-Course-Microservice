@@ -54,7 +54,6 @@ public class CourseController {
 
     @PreAuthorize("hasAnyRole('STUDENT')")
     @PostMapping("/purchases")
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Object> savePurchaseEvent(@RequestBody @Valid PurchaseEventDTO purchaseEventDTO) {
         courseService.purchaseEvent(purchaseEventDTO);
         return ResponseEntity.ok().body(SUCCESSFULLY);

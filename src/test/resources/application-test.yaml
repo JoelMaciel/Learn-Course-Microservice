@@ -1,0 +1,58 @@
+server:
+  port: 8089
+  servlet:
+    context-path: '/learn-course/'
+
+spring:
+  application:
+    name: learn-course-service
+  datasource:
+    url: jdbc:postgresql://localhost:5434/course
+    username: viana
+    password: docker123
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob.non-contextual-creation: true
+    show-sql: true
+  flyway:
+    locations: classpath:db/migration, classpath:db/testdb
+    baselineOnMigrate: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+learn:
+  serviceRegistry:
+    username: serviceresgistry
+    password: learn123sr
+  auth:
+    jwtSecret: 7Xt4tQbTnqmE?xDY4j3DphnMPHScU2EoBi9zarOtRTE9DPNJAdGz7X-ge/uZjZtiMcVKf4gyhd34QVBhjnxO0v9/KD7=2LnGNaqQI!5LgCfXz5Q-n1OD7b=96J5960mr
+    jwtExpirationMs: 14400000
+  broker:
+    exchange:
+      userEventExchange: userevent
+      purchaseCommandExchange: learn.purchaseCommand
+    queue:
+      userEventQueue:
+        name: learn.userevent.ms.course
+    key:
+      purchaseCommandKey: ms.purchase
+
+logging:
+  level:
+    com.joel: TRACE
+    root: INFO
+    org.springframework.web: DEBUG
+    org.hibernate: INFO
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: 'http://serviceregistry:learn123sr@localhost:8761/eureka'
+  instance:
+    hostname: localhost
